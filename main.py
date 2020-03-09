@@ -1,7 +1,8 @@
 from collections import namedtuple
 import requests
 
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
+
 
 app = Flask(__name__)
 
@@ -39,6 +40,13 @@ def redirect_view():
     rozklady_lodz_id = str(STOP_LIST[mpk_id].rozklady_lodz_id)
     url = 'http://rozklady.lodz.pl/Home/TimeTableReal?busStopId=' + rozklady_lodz_id
     return redirect(location=url)
+
+
+@app.route('/frames/<comma_separated_mpk_ids>')
+def frames_view(comma_separated_mpk_ids):
+    mpk_ids = comma_separated_mpk_ids.split(',')
+    return render_template('frames.html', mpk_ids=mpk_ids, percentage=int(100/len(mpk_ids)))
+
 
 if __name__ == '__main__':
     app.run()
