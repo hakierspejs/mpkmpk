@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rozkłady jazdy dla przystanków: {{ mpk_ids|join(", ") }}</title>
+        <style type="text/css">
+            body, html, table { height:100%; width: 100%; margin: 0; padding: 0; }
+        </style>
+    </head>
+    <body>
+        <table>
+        {% for mpk_id in mpk_ids %}
+            <tr>
+                <td height="{{ percentage }}%">
+                    <iframe src="/redirect?mpk_id={{ mpk_id }}" width="100%" height="100%">
+                        <a href="/redirect?mpk_id={{ mpk_id }}">{{ mpk_id }}</a>
+                    </iframe>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>
